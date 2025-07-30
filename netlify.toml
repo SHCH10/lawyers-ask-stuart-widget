@@ -1,0 +1,31 @@
+[build]
+  command = "npm run build"
+  functions = "netlify/functions"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/api/messages"
+  to = "/.netlify/functions/messages-post"
+  status = 200
+  conditions = {method = ["POST"]}
+
+[[redirects]]
+  from = "/api/messages"
+  to = "/.netlify/functions/messages-get"
+  status = 200
+  conditions = {method = ["GET"]}
+
+[[redirects]]
+  from = "/api/sms-webhook"
+  to = "/.netlify/functions/sms-webhook"
+  status = 200
+  conditions = {method = ["POST"]}
+
+# Handle client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
